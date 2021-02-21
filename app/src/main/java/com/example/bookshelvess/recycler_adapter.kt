@@ -83,7 +83,7 @@ class recycler_adapter(val kitapisimlistesi:ArrayList<String>,
         //anasayfadaki paylas butonu
         holder.itemView.paylascard.setOnClickListener {
             val paylasIntent=Intent(Intent.ACTION_SEND)
-            paylasIntent.putExtra(Intent.EXTRA_TEXT,kitapisimlistesi.get(position))
+            paylasIntent.putExtra(Intent.EXTRA_TEXT,bookFilterList.get(position))
             paylasIntent.type="text/plain"
             startActivity(it.context,paylasIntent,null)
         }

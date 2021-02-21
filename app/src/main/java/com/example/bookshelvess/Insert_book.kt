@@ -35,6 +35,7 @@ class Insert_book : Fragment() {
     var secilenId :Int?=null
     lateinit var okumadurumu :String
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -52,17 +53,22 @@ class Insert_book : Fragment() {
             var id=Insert_bookArgs.fromBundle(it).id
             val prefences = activity!!.getSharedPreferences("check", Context.MODE_PRIVATE)
             val name = prefences.getString("${id}","DEFAULT_VALUE")
-            if(name=="okudum"){
-                okudum.isChecked=true
+            if (id<=0){
+                radio_group.visibility=View.GONE
             }
-            else if(name=="okuyorum"){
-                okuyorum.isChecked=true
+            else{
+                if(name=="okudum"){
+                    okudum.isChecked=true
+                }
+                else if(name=="okuyorum"){
+                    okuyorum.isChecked=true
+                }
             }
         }
 
        kaydet.setOnClickListener {
             kaydet(it)
-           Radiobuttoncontrol()
+           //Radiobuttoncontrol()
         }
         imageView.setOnClickListener {
             gorselSec()
@@ -81,33 +87,41 @@ class Insert_book : Fragment() {
             kaydisil()
         }
 
-        //bundle kullanmak için intent yapısını kullanmam gerekiyor ve fragmentte intent yapısını kullanamadım
-        //yani buradaki alina1 değişkeni her zaman null geliyor.
-        //alinan1=null olduğu zamanda else yani kayıtlı bilgileri getiren blok çalışıyor.
-        //zaten kitap eklemek iççin item kullandığım için uygulamanın çalışmasında bir problem olmuyor
-        //ama istediğim olayı da doğru gerçekleştirmiş olmuyorum
-        val bundle2=Bundle(arguments)
-        //val alinan1=bundle2.getString("kitapekle")
-        var alinan=arguments!!.getString("key")
+        /*
+        bundle kullanmak için intent yapısını kullanmam gerekiyor ve fragmentte intent yapısını kullanamadım
+         yani buradaki alina1 değişkeni her zaman null geliyor.
+        alinan1=null olduğu zamanda else yani kayıtlı bilgileri getiren blok çalışıyor.
+        zaten kitap eklemek iççin item kullandığım için uygulamanın çalışmasında bir problem olmuyor
+        ama istediğim olayı da doğru gerçekleştirmiş olmuyorum
+        val alinan1=bundle2.getString("kitapekle")
+         */
         /*aynı şekilde kaydet butonunu da kayıtlı kitap verisini aldığım zaman visibility kullanarak gizlemek istiyorum
         ama aşağıdaki if else blokları doğru çalışmadığı için bunu gerçekleyemiyorum
 
         --navigation argümanlarıyla bunu yapabiliyoruz , bundle i intent gibi çeşitli yöntemler gösteriliyor ama fragment yapısında intent
         kullanamadığım için ikisini de gerçekleyemiyorum. */
+        /*
+        21.02.21
+        -yeni kayıt yapılırken henüz sqLite id atamadığı için kaydet butonuna basmadan önce id 0 oluyor.
+        - sqLite kaydı alındıktan sonra id atanıyor.
+        yani kontrolü id<=0 şeklinde yaparsak yeni kayıt alma durumunu ve var olan kaydı getirme durumunun kontrolünü
+        bu şekilde başarılı bir şekilde getirebiliyoruz.
+         */
         arguments?.let {
-            if (alinan=="kitapekle"){
+            var id=Insert_bookArgs.fromBundle(it).id
+            if (id<=0){
                 kitapadi.setText("")
                 yazar.setText("")
                 tur.setText("")
                 inceleme.setText("")
                 kitapbasim.setText("")
-               //kaydet.visibility=View.VISIBLE
+               kaydet.visibility=View.VISIBLE
                 val gorselsetle= BitmapFactory.decodeResource(context?.resources,R.drawable.gorselsec)
                 imageView.setImageBitmap(gorselsetle)
             }else {
                 secilenId=Insert_bookArgs.fromBundle(it).id
                 context?.let {
-                   // kaydet.visibility= View.GONE
+                    kaydet.visibility= View.GONE
                     try {
                         val dTBase = it.openOrCreateDatabase("Kutuphane", Context.MODE_PRIVATE, null)
                         val cursor=dTBase.rawQuery("SELECT * FROM kitap WHERE id= ?", arrayOf(secilenId.toString()))
@@ -134,7 +148,6 @@ class Insert_book : Fragment() {
                         e.printStackTrace()
                     }
                 }
-                //kaydet.visibility=View.INVISIBLE
             }
         }
     }
@@ -144,7 +157,6 @@ class Insert_book : Fragment() {
             val id=Insert_bookArgs.fromBundle(it).id
             if (selectedId==R.id.okudum){
                 okumadurumu="okudum"
-
             }
             else if (selectedId==R.id.okuyorum){
                 okumadurumu="okuyorum"
@@ -162,15 +174,7 @@ class Insert_book : Fragment() {
         val incelemeal=inceleme.text.toString()
         val basimal=kitapbasim.text.toString()
         val puanal=ratinginsert.rating
-       // checkbox()
-       // radio()
-       // ratingsave=ratinginsert.rating.toString()
-     //   onRadioButtonClicked(view)
-        if (secilengrsel!=null){
-            val kucukbitmap=grselKucul(300,secilenbitmap!!)
-            val byteoutput=ByteArrayOutputStream()
-            kucukbitmap.compress(Bitmap.CompressFormat.PNG,50,byteoutput)
-             bytedizi= byteoutput.toByteArray()
+
         try {
             context?.let {
                 val dTBase = it.openOrCreateDatabase("Kutuphane", Context.MODE_PRIVATE, null)
@@ -193,16 +197,20 @@ class Insert_book : Fragment() {
                 values.put("turu", tural)
                 values.put("inceleme",incelemeal)
                 values.put("puan",puanal)
-
                 if (secilenbitmap!=null){
-
                     val kucukbitmap=grselKucul(300,secilenbitmap!!)
                     val byteoutput=ByteArrayOutputStream()
                     kucukbitmap.compress(Bitmap.CompressFormat.PNG,50,byteoutput)
                     bytedizi= byteoutput.toByteArray()
                     values.put("gorsel",bytedizi)
                 }
-
+               else{
+                    val GSbitmap = BitmapFactory.decodeResource(context?.resources, R.drawable.gorselsec)
+                    val byteoutput=ByteArrayOutputStream()
+                    GSbitmap.compress(Bitmap.CompressFormat.PNG,50,byteoutput)
+                    bytedizi= byteoutput.toByteArray()
+                    values.put("gorsel",bytedizi)
+                }
                 dTBase.insert("kitap",null, values)
                 dTBase.close()
             }
@@ -210,8 +218,7 @@ class Insert_book : Fragment() {
             e.printStackTrace()
         }
         val action = Insert_bookDirections.actionİnsertBookToLibrary()
-        Navigation.findNavController(view!!).navigate(action)
-    }}
+        Navigation.findNavController(view).navigate(action) }
     fun kitabiPaylas(){
         val paylasIntent=Intent(Intent.ACTION_SEND)
         paylasIntent.putExtra(Intent.EXTRA_TEXT,kitapisim)
@@ -267,18 +274,11 @@ class Insert_book : Fragment() {
            okumadurumu="okudum"
         }
         else if(okudum.isChecked && okuyorum.isChecked){
-
-
        }
-
-
-        println("son durum ${okumadurumu}")
         val sharedPreference = activity!!.getSharedPreferences("check", Context.MODE_PRIVATE)
         val editor = sharedPreference.edit()
         editor.putString("numStars", okumadurumu)
         editor.apply()
-
-
     }
     fun kaydisil(){
         val alert= AlertDialog.Builder(context)
