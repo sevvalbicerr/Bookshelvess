@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".Insert_book"
+            android:orientation="vertical"
+            android:background="#BEA6E8"
+
+    >
+
+        <RatingBar android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/ratinginsert"
+                   />
+        <ImageView
+                android:src="@drawable/gorselsec"
+                android:layout_width="match_parent"
+                android:layout_height="182dp"
+                android:id="@+id/imageView"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/kitapbasim"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+        <Button
+                android:text="Camera"
+                android:textColor="#FFFFFF"
+
+                android:layout_width="163dp"
+                android:layout_height="33dp"
+                android:id="@+id/camera"
+                android:background="#541CB8"
+
+                android:layout_marginTop="0dp"
+                android:layout_marginLeft="100dp"
+                android:layout_marginStart="120dp"/>
+        <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="#275F78"
+                android:id="@+id/radio_group"
+                android:layout_marginBottom="20dp"
+        >
+            <RadioButton
+                    android:text="Okudum"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/okudum"
+                     android:background="#541CB8"
+
+
+            />
+            <RadioButton
+                    android:text="Okuyorum"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/okuyorum"
+                    android:background="#541CB8"
+            />
+        </RadioGroup>
+
+
+        <EditText
+                android:id="@+id/kitapadi"
+                android:layout_width="411dp"
+                android:layout_height="54dp"
+                android:hint="Kitap adı giriniz: "
+                android:textSize="30sp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginRight="1dp"
+                app:layout_constraintHorizontal_bias="1.0"/>
+
+        <EditText android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:id="@+id/yazar"
+                  android:hint="Yazar adı giriniz: "
+                  android:textSize="30sp"
+        />
+        <EditText
+                android:layout_width="408dp"
+                android:layout_height="69dp"
+                android:id="@+id/kitapbasim"
+                android:hint="Basım : "
+                android:textSize="30sp"
+                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                android:layout_marginBottom="10dp" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/tur" app:layout_constraintStart_toStartOf="parent"/>
+        <EditText
+                android:id="@+id/tur"
+                android:layout_width="404dp"
+                android:layout_height="68dp"
+                android:hint="Tür : "
+                android:textSize="30sp"
+                app:layout_constraintTop_toBottomOf="@+id/kitapbasim" android:layout_marginBottom="7dp"
+                app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toTopOf="@+id/inceleme"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="2dp"
+                android:layout_marginStart="2dp" android:layout_marginEnd="2dp" android:layout_marginRight="2dp"/>
+        <EditText
+                android:layout_width="407dp"
+                android:layout_height="114dp"
+                android:id="@+id/inceleme"
+                android:hint="İncelemeniz : "
+                android:textSize="30sp"
+                app:layout_constraintTop_toBottomOf="@+id/tur" app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginLeft="1dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginStart="1dp"
+                android:layout_marginEnd="1dp" android:layout_marginRight="1dp"/>
+
+        <LinearLayout android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:background="#275F78"
+                      android:layout_marginBottom="20dp"
+
+        >
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="kaydet"
+                    android:textColor="#FFFFFF"
+                    android:id="@+id/kaydet"
+                    android:background="#541CB8"
+            />
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="sil"
+                    android:id="@+id/sil"
+                    android:textColor="#FFFFFF"
+
+                    android:background="#541CB8"
+            />
+
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="paylaş"
+                    android:textColor="#FFFFFF"
+
+                    android:id="@+id/paylas"
+                    android:background="#541CB8"
+
+            />
+            <Button android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="güncelle"
+                    android:textColor="#FFFFFF"
+
+                    android:id="@+id/updatebook"
+                    android:background="#541CB8"
+
+            />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

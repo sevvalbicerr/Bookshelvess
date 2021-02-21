@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/navg_path"
+            app:startDestination="@id/library">
+
+    <fragment android:id="@+id/library" android:name="com.example.bookshelvess.Library" android:label="fragment_library"
+              tools:layout="@layout/fragment_library">
+        <action android:id="@+id/action_library_to_insert_book" app:destination="@id/insert_book"/>
+    </fragment>
+    <fragment android:id="@+id/insert_book" android:name="com.example.bookshelvess.Insert_book"
+              android:label="fragment_insert_book" tools:layout="@layout/fragment_insert_book">
+        <action android:id="@+id/action_insert_book_to_library" app:destination="@id/library"/>
+        <argument android:name="id" app:argType="integer" android:defaultValue="0"/>
+    </fragment>
+</navigation>

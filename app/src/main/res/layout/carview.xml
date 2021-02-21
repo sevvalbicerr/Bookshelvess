@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+            android:layout_width="390dp"
+            android:layout_height="172dp"
+            app:cardElevation="10dp"
+            app:cardCornerRadius="20dp"
+            android:layout_margin="10dp"
+            app:cardMaxElevation="12dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            android:id="@+id/cv"
+            app:cardBackgroundColor="#825ACA"
+    >
+
+
+        <ImageView android:layout_width="230dp"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/img"
+                   android:src="@drawable/v"
+        />
+
+        <RatingBar android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/ratingbarcard"
+                   android:layout_marginLeft="105dp"
+                   android:scaleX=".6"
+                   android:scaleY=".6"
+                   android:transformPivotX="250dp"
+                   android:transformPivotY="0dp"
+                   android:isIndicator="true"
+                   android:background="#B395EA"
+
+        />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/app_name"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
+                android:layout_marginStart="100dp"
+                android:textSize="20sp"
+                android:textColor="#541CB8"
+                android:textStyle="bold"
+                android:id="@+id/textcardview"
+                android:background="#B395EA"
+                android:layout_marginLeft="100dp"/>
+        <TextView android:layout_width="wrap_content"
+                  android:text="yazarrrrrr"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="30dp"
+                  android:layout_marginLeft="0dp"
+                  android:layout_marginBottom="20dp"
+                  android:gravity="center"
+                  android:textSize="20sp"
+                  android:textStyle="bold"
+                  android:textColor="#541CB8"
+                  android:id="@+id/yazarcardview"
+                  android:layout_marginStart="210dp"
+                  android:background="#B395EA"
+
+        />
+        <Button android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:id="@+id/paylascard"
+                android:background="#B395EA"
+                android:text="Paylaş"
+                android:textSize="10sp"
+                android:textColor="#541CB8"
+                android:layout_marginTop="100dp"
+                android:layout_marginLeft="300dp"
+
+                android:onClick="paylasfonk"/>
+
+
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
